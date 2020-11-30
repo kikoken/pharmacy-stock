@@ -6,7 +6,7 @@ import Stock from './stock.api'
 const router = Router()
 router.get('/stock', Stock.getAll)
 router.post('/stock', Stock.add)
-router.delete('/stock/:id', Stock.delete)
+router.delete('/stock/:id', Stock.deleteByID)
 
 
 export default router
