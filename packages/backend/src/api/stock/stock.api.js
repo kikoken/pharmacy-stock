@@ -1,3 +1,5 @@
+import repository from '../../repository'
+
 const StockApi = stock => ({
     add: async (req, res, next) => {
         
