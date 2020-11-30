@@ -1,7 +1,16 @@
-FROM node:8
-WORKDIR /app
-COPY package.json /app
-RUN npm i -g serve
-ADD ./build /app/build
-CMD serve -s build -l 3000
-EXPOSE 3000
+FROM node:alpine
+
+RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+WORKDIR /home/node/app
+COPY package*.json ./
+
+USER node
+RUN npm install
+COPY --chown=node:node . .
+
+COPY dist/ .
+
+EXPOSE 4000
+CMD [ "node", "index.js" ]
+
+USER node
