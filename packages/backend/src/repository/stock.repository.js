@@ -1,16 +1,17 @@
+import Stock from '../models/stock'
+
 const StockRepository = client => ({
-    add: async (search) => {
-        const response = await client.get(search)
+    add: async (name, amount) => {
+        const newItem = new Message({name, amount})
+        return await newItem.save()
+    },
+    get: async () => {
+        const response = await client.find()
         return response
     },
-    get: async (search) => {
-        const response = await client.get(search)
-        return response
-    },
-    delete: async (search) => {
-        const response = await client.get(search)
-        return response
+    delete: async (iid) => {
+       return await client.findByIdAndRemove(id)
     },
 })
 
-export default StockRepository
+export default StockRepository(Stock)
