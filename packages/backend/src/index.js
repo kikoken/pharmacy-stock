@@ -1,6 +1,8 @@
 import config from './config'
 import server from './server'
 
+import './database'
+
 // log unhandled execpetions
 process.once('uncaughtException', (err) => {
     console.error('Unhandled Exception', err)
