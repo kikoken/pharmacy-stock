@@ -9,4 +9,4 @@ const repository = () => Object.freeze({
     pharmacy
 })
 
-export default repository
+export default repository()
