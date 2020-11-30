@@ -7,6 +7,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "start": "lerna run --scope backend-service start && lerna run --scope frontend start"
+  },
   "version": "1.0.0",
   "main": "index.js",
   "author": "kikoken <kikoken@gmail.com>",
