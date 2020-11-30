@@ -2,11 +2,11 @@ import React from 'react'
 import { Table, Button, Alert } from 'react-bootstrap'
 
 const Stock = props => {
-  const { items } = props
+  const { items, onDeleteItem } = props
 
   if (items.length === 0) return (
     <>
-      <Alert variant={light}>
+      <Alert variant='primary'>
         This moment not register any items
       </Alert>
     </>
@@ -25,12 +25,12 @@ const Stock = props => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Paracetamol</td>
-              <td>3</td>
-              <td><Button variant="danger">Delete</Button> </td>
-            </tr>
+            { items.map((item, idx) => (<tr key={idx}>
+            <td>{idx + 1}</td>
+            <td>{item.name}</td>
+            <td>{item.amount}</td>
+              <td><Button variant="danger" onClick={() => onDeleteItem(item._id)}>Delete</Button> </td>
+            </tr>))}
           </tbody>
         </Table>
       </>

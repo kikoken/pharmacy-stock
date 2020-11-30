@@ -1,19 +1,34 @@
 import { useEffect, useState, useCallback } from "react";
 
 import './App.css';
-import { Container, Row, Col, Navbar, Table, Button} from 'react-bootstrap';
+import { Container, Row, Col, Navbar} from 'react-bootstrap';
 import axios from 'axios'
 import config from './config'
 
 import Stock from './components/stock'
+import NewItem from './components/newItem'
 const App = () => {
   const [stock, setStock] = useState([])
 
   const loadStock = useCallback(async () => {
     const response = await axios.get(config.url)
-    setStock(response.data)
+    setStock(response.data.data)
   }, [])
 
+
+  const handlerNewItem = async (name, amount) => {
+    await axios.post(config.url, { data: {
+        name,
+        amount
+      }
+    })
+    loadStock()
+  }
+
+  const handlerDeleteItem = async (id) => {
+    await axios.delete(`${config.url}/${id}`)
+    loadStock()
+  }
 
   useEffect(() => {
     loadStock()
@@ -29,15 +44,11 @@ const App = () => {
       <hr/>
       <Row>
         <Col>
-          <Stock items={stock}/>
+          <Stock items={stock} onDeleteItem={handlerDeleteItem}/>
         </Col>
       </Row>
       <footer>
-        <Row>
-          <Col>
-            <Button variant="primary">Agregar</Button>
-          </Col>
-        </Row>
+        <NewItem onNewItem={handlerNewItem}/>
       </footer>
 
 

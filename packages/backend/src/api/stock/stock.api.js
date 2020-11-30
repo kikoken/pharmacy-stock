@@ -4,7 +4,8 @@ const StockApi = stock => ({
     add: async (req, res, next) => {
         
         try {
-            const payload = await stock.add(req.body.data)
+            const {name, amount} = req.body.data
+            const payload = await stock.add(name, amount)
         
             res.status(200).json({
                  data: payload
@@ -30,7 +31,7 @@ const StockApi = stock => ({
      deleteByID: async (req, res, next) => {
         
         try {
-            const id = req.body.data
+            const { id } = req.params
             await stock.delete(id)
         
             res.status(200).json({
