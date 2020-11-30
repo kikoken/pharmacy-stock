@@ -1,7 +1,7 @@
-import repository from '../repository'
+import repository from '../../repository'
 
 
-const PharmacyApi = pharmacy => () => ({
+const PharmacyApi = pharmacy => ({
     search: async (req, res, next) => {
         const payload = await pharmacy.searchMedicines(req.body.data)
     

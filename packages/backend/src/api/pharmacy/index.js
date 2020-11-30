@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-
+// api
 import Pharmacy from './pharmacy.api'
 
 const router = Router()
