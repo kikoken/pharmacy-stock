@@ -1,6 +1,24 @@
+import { useEffect, useState, useCallback } from "react";
+
 import './App.css';
 import { Container, Row, Col, Navbar, Table, Button} from 'react-bootstrap';
-function App() {
+import axios from 'axios'
+import config from './config'
+
+import Stock from './components/stock'
+const App = () => {
+  const [stock, setStock] = useState([])
+
+  const loadStock = useCallback(async () => {
+    const response = await axios.get(config.url)
+    setStock(response.data)
+  }, [])
+
+
+  useEffect(() => {
+    loadStock()
+  }, [loadStock])
+
   return (
     <Container>
       <header>
@@ -11,25 +29,7 @@ function App() {
       <hr/>
       <Row>
         <Col>
-          <h3>STOCK ACTUAL</h3>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Stock</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Paracetamol</td>
-                <td>3</td>
-                <td><Button variant="danger">Delete</Button> </td>
-              </tr>
-            </tbody>
-          </Table>
+          <Stock items={stock}/>
         </Col>
       </Row>
       <footer>
